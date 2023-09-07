@@ -1,0 +1,24 @@
+{
+    "apps": [
+        {
+            "name": "stock",
+            "script": "/var/www/stock/index.js",
+            "env_production": {
+                "NODE_ENV": "production"
+            },
+            "env_development": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "name": "company",
+            "script": "/var/www/company/index.js",
+            "env_production": {
+                "NODE_ENV": "production"
+            },
+            "env_development": {
+                "NODE_ENV": "development"
+            }
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "command": "npm start",
+            "name": "Start Company",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/company"
+        },
+        {
+            "command": "npm start",
+            "name": "Start Stock",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/stock"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Start Both",
+            "configurations": ["Start Stock", "Start Company"]
+        }
+    ]
+}

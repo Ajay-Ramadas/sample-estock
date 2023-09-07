@@ -1,0 +1,26 @@
+{
+  "name": "estock",
+  "version": "1.0.0",
+  "description": "Simple API for man managing E-Stock Market's Stocks",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "start:prod": "pm2 start index.js",
+    "stop:prod": "pm2 stop default"
+  },
+  "author": "Ajay Ramadas",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-actuator": "^1.8.2",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.3.6",
+    "nodemon": "^2.0.16",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.4.0"
+  }
+}

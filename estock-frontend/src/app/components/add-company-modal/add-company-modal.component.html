@@ -1,0 +1,78 @@
+<div class="modal-header">
+	<h4 class="modal-title pull-left">Add New Company</h4>
+	<button type="button" class="btn-close close pull-right" aria-label="Close" (click)="close()">
+		<span aria-hidden="true" class="visually-hidden">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<form
+		class="needs-validation"
+		id="add-company-form"
+		[formGroup]="registerForm"
+		(ngSubmit)="submit()"
+		ngNativeValidate
+	>
+		<label for="company-name"> Name</label>
+		<div class="input-group mb-3">
+			<input
+				type="text"
+				id="company-name"
+				placeholder="Enter Company Name"
+				class="form-control"
+				formControlName="name"
+				required
+			/>
+		</div>
+
+		<label for="company-ceo">CEO</label>
+		<div class="input-group mb-3">
+			<input
+				type="text"
+				id="company-ceo"
+				placeholder="Enter Company CEO's Name"
+				class="form-control"
+				formControlName="ceo"
+				required
+			/>
+		</div>
+		<label for="company-turnover">Turnover</label>
+		<div class="input-group mb-3">
+			<input
+				type="number"
+				id="company-turnover"
+				placeholder="Enter Company Turnover. Must be greater than 10Cr"
+				class="form-control"
+				min="100000000"
+				formControlName="turnover"
+				required
+			/>
+		</div>
+		<label for="company-website">Website</label>
+		<div class="input-group mb-3">
+			<input
+				type="text"
+				id="company-website"
+				placeholder="Enter Company Website Link"
+				class="form-control"
+				formControlName="website"
+				title="www.abc.com"
+				required
+			/>
+		</div>
+		<label for="company-stock-exchange">Stock Exchange</label>
+		<div class="input-group mb-3">
+			<input
+				type="text"
+				id="company-stock-exchange"
+				placeholder="Enter Stock Exchange Company is enlisted at"
+				class="form-control"
+				formControlName="exchange"
+				required
+			/>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+	<input type="submit" form="add-company-form" class="btn btn-primary" value="Save" />
+</div>

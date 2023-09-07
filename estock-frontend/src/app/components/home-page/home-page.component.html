@@ -1,0 +1,67 @@
+<div class="home-body">
+	<div *ngIf="alertOptions?.showAlert">
+		<bs-alert
+			type="success"
+			*ngIf="alertOptions?.success"
+			[dismissible]="true"
+			dismissOnTimeout="15000"
+			(onClosed)="resetAlerts()"
+			>Company Successfully Registered</bs-alert
+		>
+		<bs-alert
+			type="danger"
+			*ngIf="!alertOptions?.success"
+			[dismissible]="true"
+			dismissOnTimeout="15000"
+			(onClosed)="resetAlerts()"
+			>Company could not be registered. Please try after some time</bs-alert
+		>
+	</div>
+	<bs-alert
+		type="success"
+		*ngIf="deleteCompanyAlertOptions?.showAlert"
+		[dismissible]="true"
+		dismissOnTimeout="15000"
+		(onClosed)="resetAlerts()"
+		>Company Deleted successfully</bs-alert
+	>
+	<div class="container px-4 text-center">
+		<div class="row gx-5">
+			<div class="col">
+				<button type="button" class="btn btn-primary" (click)="addCompany()">Add Company</button>
+			</div>
+			<div class="col">
+				<button type="button" class="btn btn-primary" (click)="showAllCompaniesList()">
+					List All Companies
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="container px-4 text-center mt-md-5">
+		<section class="search-box">
+			<form (ngSubmit)="search()" [formGroup]="searchBox" id="searchBox" ngNativeValidate>
+				<input
+					type="number"
+					min="1"
+					formControlName="searchText"
+					class="form-control searchTextBox"
+					placeholder="Company Code"
+					required
+				/>
+				<input type="submit" class="btn btn-primary search-btn" form="searchBox" value="Search" />
+			</form>
+		</section>
+		<section *ngIf="showAllCompanies">
+			<app-list-companies
+				(selectedCompanyCode)="showMore($event)"
+				[refresh]="refresh"
+			></app-list-companies>
+		</section>
+		<section *ngIf="!showAllCompanies && companyDetailsOfCode">
+			<app-company-details
+				[code]="companyDetailsOfCode"
+				(companyDeleted)="onCompanyDeletion()"
+			></app-company-details>
+		</section>
+	</div>
+</div>

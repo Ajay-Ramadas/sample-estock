@@ -1,0 +1,39 @@
+<div class="container px-4 text-center">
+	<ul class="list-group" *ngIf="companyList.length > 0">
+		<li *ngFor="let company of companyList">
+			<div class="card">
+				<div class="card-body">
+					<div class="row gx-0 gy-1 mb-md-1">
+						<div class="col">
+							<h5><span class="badge bg-secondary">Company Code</span></h5>
+						</div>
+						<div class="col">
+							<h5>{{ company.code }}</h5>
+						</div>
+					</div>
+					<div class="row gx-0 gy-1">
+						<div class="col">
+							<h5><span class="badge bg-secondary">Company Name</span></h5>
+						</div>
+						<div class="col">
+							<h5>{{ company.name }}</h5>
+						</div>
+					</div>
+				</div>
+				<div class="card-body divider">
+					<div class="row gx-0 gy-1">
+						<div class="col">
+							<button class="btn btn-success" (click)="showMore(company.code)">
+								Show More Info
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+
+	<div *ngIf="!companyList?.length && noFetchedCompanies">
+		Could not fetch Company List. Please try after some time
+	</div>
+</div>

@@ -1,0 +1,140 @@
+<div *ngIf="stockAdditionAlertOptions?.showAlert">
+	<bs-alert
+		type="success"
+		*ngIf="stockAdditionAlertOptions?.success"
+		[dismissible]="true"
+		dismissOnTimeout="15000"
+		(onClosed)="resetAlerts()"
+		>New Stock Price added successfully</bs-alert
+	>
+	<bs-alert
+		type="danger"
+		*ngIf="!stockAdditionAlertOptions?.success"
+		[dismissible]="true"
+		dismissOnTimeout="15000"
+		(onClosed)="resetAlerts()"
+		>Stock Price could not be added. Please try after some time</bs-alert
+	>
+</div>
+<div *ngIf="deleteCompanyAlertOptions?.showAlert">
+	<bs-alert
+		type="danger"
+		*ngIf="!deleteCompanyAlertOptions?.success"
+		[dismissible]="true"
+		dismissOnTimeout="15000"
+		(onClosed)="resetAlerts()"
+		>Company could not be deleted. Please try after some time</bs-alert
+	>
+</div>
+
+<div class="container px-4 text-center" *ngIf="!showError; else error">
+	<ul class="list-group list-group-horizontal">
+		<li class="list-group-item flex-fill list-group-item-dark">Company Code</li>
+		<li class="list-group-item flex-fill">{{ company?.code }}</li>
+	</ul>
+	<ul class="list-group list-group-horizontal">
+		<li class="list-group-item flex-fill list-group-item-dark">Name</li>
+		<li class="list-group-item flex-fill">{{ company?.name }}</li>
+	</ul>
+	<ul class="list-group list-group-horizontal">
+		<li class="list-group-item flex-fill list-group-item-dark">Chief Executive Officer</li>
+		<li class="list-group-item flex-fill">{{ company?.ceo }}</li>
+	</ul>
+	<ul class="list-group list-group-horizontal">
+		<li class="list-group-item flex-fill list-group-item-dark">Website</li>
+		<a
+			class="list-group-item list-group-item-action"
+			target="_blank"
+			rel="noopener noreferrer"
+			(click)="openWebsite()"
+		>
+			{{ company?.website }}
+		</a>
+	</ul>
+	<ul class="list-group list-group-horizontal">
+		<li class="list-group-item flex-fill list-group-item-dark">Turnover</li>
+		<li class="list-group-item flex-fill">{{ company?.turnover }}</li>
+	</ul>
+	<ul class="list-group list-group-horizontal">
+		<li class="list-group-item flex-fill list-group-item-dark">Current Stock Price</li>
+		<li class="list-group-item flex-fill">
+			{{ company?.latestStockPrice !== -1 ? company?.latestStockPrice : 'NA' }}
+		</li>
+	</ul>
+
+	<div class="container px-4 mt-md-3 text-center">
+		<div class="row gx-5">
+			<div class="col">
+				<button class="btn btn-primary" (click)="openNewStockPriceModal(addstock)">
+					Add New stock
+				</button>
+			</div>
+			<div class="col">
+				<button
+					class="btn btn-danger"
+					(click)="openDeleteCompanyConfirmation(deletecompanyconfirmation)"
+				>
+					Delete Company
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="container px-4 mt-md-3 text-center"
+		*ngIf="company?.latestStockPrice && company?.latestStockPrice !== -1"
+	>
+		<app-stock-details [companyCode]="company?.code ?? -1"></app-stock-details>
+	</div>
+</div>
+
+<ng-template #addstock>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Add New Stock Price</h4>
+	</div>
+	<div class="modal-body">
+		<form
+			class="needs-validation"
+			id="add-new-stock-price-form"
+			[formGroup]="addStockForm"
+			ngNativeValidate
+		>
+			<label for="newPrice">New Stock Price</label>
+			<input
+				type="number"
+				step="10"
+				id="newPrice"
+				formControlName="newPrice"
+				placeholder="Enter new stock price"
+				required
+			/>
+			<div class="modal-footer mt-md-3">
+				<button (click)="closeNewStockPriceModal()" class="btn btn-danger">Close</button>
+				<input
+					type="submit"
+					form="add-new-stock-price-form"
+					class="btn btn-primary"
+					(click)="addNewStockPrice()"
+					value="Submit"
+				/>
+			</div>
+		</form>
+	</div>
+</ng-template>
+
+<ng-template #deletecompanyconfirmation>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Delete Company</h4>
+	</div>
+	<div class="modal-body">Are you sure you want to delete the company?</div>
+	<div class="modal-body text-end">
+		<button (click)="closeDeleteCompanyModal()" class="btn btn-primary m-3">Cancel</button>
+		<button class="btn btn-danger m-3" (click)="deleteCompany()">Delete</button>
+	</div>
+</ng-template>
+
+<ng-template #error>
+	<bs-alert type="danger"
+		>Company details could not be fetched. Please try after some time</bs-alert
+	>
+</ng-template>

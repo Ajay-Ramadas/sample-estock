@@ -1,0 +1,1 @@
+export const dbUrl = process.env.mongoConn || "mongodb://localhost:27017/E-Stock";
