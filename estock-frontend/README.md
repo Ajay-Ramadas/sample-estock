@@ -1,6 +1,6 @@
-# EstockFrontend
+# E-Stock Sample Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+This is a sample frontend to demonstate Angular+Typescript implementation of a EStock market application.
 
 ## Development server
 
